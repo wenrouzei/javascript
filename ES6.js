@@ -1,3 +1,64 @@
+/////////// es6 var let const
+//var function scope 可重复申明定义、改变值，函数作用域，全局或函数
+var a = 3333
+var a = 'bbbb'
+function b() {
+    var b = 'fasdfasd'
+    console.log(b)
+}
+b()
+console.log(a, b)
+//let const block scope 块级作用域 全局或{}中
+{
+    let c = 'fsafasdfas'
+    const d = '42342342'
+    console.log(c,d)
+}
+//console.log(c,d) //报错 Uncaught ReferenceError: c is not defined
+//let 可改变值
+let c = 'fasdfsadfsa'
+c = '23423423'
+console.log(c)
+//const 不可改变值, 引用类型属性可改变
+const person = {
+    name: 'fsafsa',
+    age: 18
+}
+//person = {name:'f2342342', age: 22} //报错 Uncaught TypeError: Assignment to constant variable.
+person.name = '23423423' //可改变属性
+console.log(person)
+const lee = Object.freeze(person) // Object.freeze 设置属性也不能改变
+lee.name = 'lee'
+lee.age = 23423
+console.log('Object.freeze 设置不可改变',lee)
+
+for(var i=0;i<=10;i++){
+    //console.log(i)
+    setTimeout(function () {
+        console.log(`i:${i}`)
+    }, 1000)
+}
+for(let i=0;i<=10;i++){
+    //console.log(i)
+    setTimeout(function () {
+        console.log(`i:${i}`)
+    }, 1000)
+}
+
+/////////// es6 箭头函数 => Arrow Function  箭头函数没有自己的this、arguments、super、new.target，它们分别指向外层函数的相应变量。
+const numbers = [1,2,3,4,5]
+let double = numbers.map(number =>{
+    return number*2
+})
+console.log(`显式返回 ${double}`)
+double = numbers.map(number => number*2)
+console.log(`隐式返回 ${double}`)
+
+//匿名函数
+const greet = name => console.log(`hello ${name}`)
+greet('leelee')
+
+
 /////////// es6 Array.from() Array.of() 数组非原型函数
 // Array.form() 讲其他类型转为数组
 //对象转数组
