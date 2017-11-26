@@ -58,6 +58,75 @@ console.log(`隐式返回 ${double}`)
 const greet = name => console.log(`hello ${name}`)
 greet('leelee')
 
+const leeee = {
+    name: 'leeee',
+    scopes : [1,3,5,7],
+    getMyName: function () {
+        console.log(this)
+        self = this
+        this.scopes.map(function(item){
+            console.log(`${self.name}'s scope ${item}`)
+        })
+    },
+    getHisName: function () {
+        console.log(this)
+        this.scopes.map(item => {
+            console.log(`${this.name}'s scope ${item}`) //箭头函数没有自己的this 继承父级作用域的this
+        })
+    }
+}
+leeee.getMyName()
+leeee.getHisName()
+
+/////////// es6 函数参数默认值
+function test(a=1,b=c){
+    return a*b;
+}
+console.log(test(undefined,666)) //赋值为undefined，则使用默认值
+
+
+/////////// es6 模板字符串 可嵌套 标签模板字符串
+const sentence = `模板字符串 '${a}' 可嵌套 ${numbers.map(number => `
+<li>${number}</li>
+`).join('')} test "${c}"`
+console.log(sentence)
+
+/////////// es6 字符串函数 .startWith() .endWith() .includes() .repeat()
+console.log('fasdfsad'.startsWith('fa'), '2423423'.endsWith('423'))
+console.log('fasdfsadfas'.includes('fa',2))
+console.log('123'.repeat(10))
+
+
+/////////// es6 对象解构
+const {name: mName}  = leeee
+console.log(mName)
+
+/////////// es6 数组解析
+const myNumbers = [1,3,2,5]
+const [one,two] = myNumbers
+console.log(`数组解析 ${one} ${two}`)
+let x = 2
+let z = 3;
+[x, z] = [z, x]
+console.log(x, z)
+
+/////////// es6 for of 数组、字符串、dom元素， 不支持对象？
+const fruits = ['apple', 'banana']
+for(let [index, fruit] of fruits.entries()){
+    console.log(index,fruit)
+}
+
+const str = 'fasdfsadf'
+for(let char of str){
+    console.log(char)
+}
+
+let lis = document.querySelectorAll('li')
+for(let li of lis){
+    li.addEventListener('click', function () {
+        this.classList.toggle('completed')
+    })
+}
 
 /////////// es6 Array.from() Array.of() 数组非原型函数
 // Array.form() 讲其他类型转为数组
