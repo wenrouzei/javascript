@@ -102,23 +102,33 @@ const {name: mName}  = leeee
 console.log(mName)
 
 /////////// es6 数组解析
-const myNumbers = [1,3,2,5]
+const myNumbers = [1,3]
 const [one,two] = myNumbers
-console.log(`数组解析 ${one} ${two}`)
+console.log(`const [one,two] = myNumbers 数组解析: ${one} ${two}`)
+const [m1,m2,m3='fsafsa'] = myNumbers
+console.log(`const [m1,m2,m3='fsafsa'] = myNumbers 数组带默认值解析: ${m1} ${m2} ${m3}`)
+
+// 交换变量值
 let x = 2
 let z = 3;
 [x, z] = [z, x]
-console.log(x, z)
+console.log(`交换变量值 let x = 2 let z = 3 [x, z] = [z, x] ${x} ${z}`)
 
-/////////// es6 for of 数组、字符串、dom元素， 不支持对象？
+/////////// es6 for forEach for in(包含属性)  for of
 const fruits = ['apple', 'banana']
+fruits.forEach(fruit => {
+    console.log(`fruit.forEach ${fruit}`)
+})
+
+//for of 数组、字符串、dom元素， 不支持对象？
 for(let [index, fruit] of fruits.entries()){
-    console.log(index,fruit)
+    console.log(`const fruits = ['apple', 'banana'] for of ${index} ${fruit}`)
 }
 
+// for of字符串
 const str = 'fasdfsadf'
 for(let char of str){
-    console.log(char)
+    console.log(`const str = 'fasdfsadf' for of字符串 ${char}`)
 }
 
 let lis = document.querySelectorAll('li')
@@ -130,7 +140,7 @@ for(let li of lis){
 
 /////////// es6 Array.from() Array.of() 数组非原型函数
 // Array.form() 讲其他类型转为数组
-//对象转数组
+//可迭代对象转数组
 const todos = document.querySelectorAll('li') //nodeList对象
 const names = Array.from(todos).map(todo => todo.textContent)
 const names2 = Array.from(todos, todo => todo.textContent)
@@ -144,7 +154,7 @@ function testArrayFrom(){
 }
 console.log(testArrayFrom(1,3,4,6,8,9))
 
-// Array.of() 讲元素组合成数组
+// Array.of() 将元素组合成数组 保持元素一致性 比 new Array(1) new Array(1,2,3) 好
 console.log(Array.of(1,54,67,'fasdfsad'))
 
 /////////// es6 array原型函数非循环,查找符合立即返回 .find() .findIndex() .some() .every()
