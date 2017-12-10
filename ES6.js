@@ -191,16 +191,16 @@ console.log(name, id ,scopes)
 const youngers = ['Jon', 'Tom']
 const olders = ['Jam', 'Martin']
 
-//////数组合并////
+//数组合并
 let members = []
 members = members.concat(youngers)
 members.push('Marry')
 members = members.concat(olders)
 
 const members2 = [...youngers, 'Marry', ...olders]
-console.log(members, members2, [...'hello world'])
+console.log(`members, members2, [...'hello world']`, members, members2, [...'hello world'])
 
-/////数组赋值///
+//数组赋值
 const members3 = members; // 修改时候同时改变
 members3[0] = 'aaa'
 console.log(members3,members)
@@ -209,5 +209,62 @@ const member4 = [].concat(members)
 const member5 = [...members]
 member4[0] = '444' // 修改时候members不会改变
 member5[0] = '555' // 修改时候members不会改变
-console.log(member4, member5, members)
+console.log(`const member4 = [].concat(members) const member5 = [...members]`, member4, member5, members)
 
+//////////////// es6 扩展运算符在函数中的应用
+const rules = ['r1', 'r2', 'r3']
+const newRules = ['r4', 'r5']
+// 数组合并不符合
+//rules.push(newRules)
+
+//数组合并两种方式都可以
+rules.push.apply(rules, newRules)
+rules.push(...newRules)
+console.log(`数组合并 const rules = ['r1', 'r2', 'r3'] const newRules = ['r4', 'r5']`, rules)
+
+//减轻参数传入
+const dateFIles = [2017,12,9]
+const date = new Date(...dateFIles)
+console.log(date)
+
+
+//////////////// es6 对象字面量的扩展
+const myName = 'lee'
+const myAge = 22
+const leeObj = {
+    myName: myName,
+    myAge: myAge,
+    getName: function () {
+        console.log(this.myName);
+    }
+}
+// 属性名跟变量名一样的时候，可简写、 函数也可以简写
+const leeObj2 = {
+    myName,
+    myAge,
+    getName() {
+        console.log(this.myName);
+    }
+}
+leeObj.getName()
+leeObj2.getName()
+console.log(`es6对象属性名跟变量名一样的时候，可简写、 函数也可以简写`, leeObj,leeObj2)
+
+// 计算属性 自动递增
+let userId = 0
+const userIds = {
+    [`user-${++userId}`] : userId,
+    [`user-${++userId}`] : userId,
+    [`user-${++userId}`] : userId,
+    [`user-${++userId}`] : userId,
+}
+console.log(userIds)
+
+const keys = [1,2,3]
+const values = ['a','b','c']
+const combineObj = {
+    [keys.shift()]:values.shift(),
+    [keys.shift()]:values.shift(),
+    [keys.shift()]:values.shift(),
+}
+console.log(combineObj)
